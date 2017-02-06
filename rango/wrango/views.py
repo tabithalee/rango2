@@ -10,10 +10,11 @@ def index(request):
 #Place list in context_dict to be passed to template engine
 
     category_list = Category.objects.order_by('-likes')[:5]
+    pages_list = Page.objects.order_by('-views')[:5]
     
 #    return HttpResponse("Rango says hey there partner! <br/><a href='/rango/about/'>About</a>")
 #    context_dict = {'boldmessage': "Crunchy, creamy, cookie, candy, cupcake!"}
-    context_dict = {'categories': category_list}
+    context_dict = {'categories': category_list, 'pages': pages_list}
     return render(request, 'rango/index.html', context = context_dict)
 
 def about(request):
