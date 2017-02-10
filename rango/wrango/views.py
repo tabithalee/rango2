@@ -18,17 +18,14 @@ def index(request):
     request.session.set_test_cookie()
     category_list = Category.objects.order_by('-likes')[:5]
     pages_list = Page.objects.order_by('-views')[:5]
-    context_dict = {'categories': category_list, 'pages': pages_list}
+    context_dict = {'categories': category_list, 'pages': pages_list, }
 #    return HttpResponse("Rango says hey there partner! <br/><a href='/rango/about/'>About</a>")
 #    context_dict = {'boldmessage': "Crunchy, creamy, cookie, candy, cupcake!"}
 
-    return render(request, 'rango/index.html', context = context_dict)
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
 
-    response = render(request, 'rango/index.html', context=context_dict)
-    return response
-
+    return render(request, 'rango/index.html', context=context_dict)
 
 # A helper method
 def get_server_side_cookie(request, cookie, default_val=None):
@@ -62,8 +59,18 @@ def about(request):
         print("TEST COOKIE WORKED!")
         request.session.delete_test_cookie()
 
+    print(request.method)
+    # prints out the user name, if no one is logged in it prints `AnonymousUser`
+    print(request.user)
+
+    visitor_cookie_handler(request)
+    context_dict = {}
+    context_dict['visits'] = request.session['visits']
+
+
     #    return HttpResponse("Rango says here is the about page. <br/><a href='/rango/'>Index</a>")
-    return render(request, 'rango/about.html')
+    response = render(request, 'rango/about.html', context_dict)
+    return response
 
 def show_category(request, category_name_slug):
     context_dict={}
