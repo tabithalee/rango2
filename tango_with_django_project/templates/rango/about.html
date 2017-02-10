@@ -1,0 +1,24 @@
+<!DOCTYPE  html>
+
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+{{ category.name }}
+{% endblock %}
+
+ {% block body_block %}
+        <h1> This is the ... </h1>
+        <div>
+            About page
+        </div>
+        <div>
+            tutorial put together by tabitha lee
+        </div>
+        <div>
+           <!-- <a href="/rango/">Index</a><br />-->
+            <img src="{% static "images/cat.jpg" %}"
+                 alt="pic of lizard" /><br />
+            <img src="/media/cat.jpg"
+                 alt="pic of cat" height=200 width=100/>
+{% endblock %}
